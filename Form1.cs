@@ -13,6 +13,7 @@ namespace GuessSound
     public partial class fMain : Form
     {
         fParam fp = new fParam();
+        fGame fg = new fGame();
     
         public fMain()
         {
@@ -27,6 +28,11 @@ namespace GuessSound
         private void btnParams_Click(object sender, EventArgs e)
         {
             fp.ShowDialog();
+        }
+
+        private void btnPlay_Click(object sender, EventArgs e)
+        {
+            fg.ShowDialog();
         }
     }
 }
