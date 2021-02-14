@@ -12,6 +12,8 @@ namespace GuessSound
 {
     public partial class fMain : Form
     {
+        fParam fp = new fParam();
+    
         public fMain()
         {
             InitializeComponent();
@@ -20,6 +22,11 @@ namespace GuessSound
         private void btnExit_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void btnParams_Click(object sender, EventArgs e)
+        {
+            fp.ShowDialog();
         }
     }
 }
