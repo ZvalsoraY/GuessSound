@@ -19,9 +19,17 @@ namespace GuessSound
 
         static public void ReadMusic()
         {
-            string[] music_files = Directory.GetFiles(lastFolder, "*.mp3", allDirectories ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly);
-            list.Clear();
-            list.AddRange(music_files);
+            try
+            {
+                string[] music_files = Directory.GetFiles(lastFolder, "*.mp3", allDirectories ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly);
+                list.Clear();
+                list.AddRange(music_files);
+            }
+            catch
+            {
+
+            }
+            
         }
 
         static string regKeyName = "Software\\MyCompanyName\\GuessSound";
@@ -55,7 +63,7 @@ namespace GuessSound
                 {
                     lastFolder = (string)rk.GetValue("LastFolder");
                     gameDuration = (int)rk.GetValue("GameDuration");
-                    randomStart = Convert.ToBoolean(rk.GetValue("Random", false));
+                    randomStart = Convert.ToBoolean(rk.GetValue("RandomStart", false));
                     musicDuration = (int)rk.GetValue("MusicDuration");
                     allDirectories = Convert.ToBoolean(rk.GetValue("AllDirectories"));  
                 }
