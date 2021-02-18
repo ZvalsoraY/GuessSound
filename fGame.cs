@@ -101,7 +101,10 @@ namespace GuessSound
             if (e.KeyData == Keys.A)
             {
                 GamePause();
-                if (MessageBox.Show("Right answere?", "Player 1", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                fMessage fm = new fMessage();
+                fm.lblMessage.Text = "Player 1";
+                //if (MessageBox.Show("Right answere?", "Player 1", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                if (fm.ShowDialog() == DialogResult.Yes)
                 {
                     lblCounter1.Text = Convert.ToString(Convert.ToInt32(lblCounter1.Text) + 1);
                     MakeMusic();
@@ -111,13 +114,23 @@ namespace GuessSound
             if (e.KeyData == Keys.P)
             {
                 GamePause();
-                if (MessageBox.Show("Right answere?", "Player 2", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                fMessage fm = new fMessage();
+                fm.lblMessage.Text = "Player 2";
+                //if (if (MessageBox.Show("Right answere?", "Player 2", MessageBoxButtons.YesNo) == DialogResult.Yes))
+                if (fm.ShowDialog() == DialogResult.Yes)
                 {
                     lblCounter2.Text = Convert.ToString(Convert.ToInt32(lblCounter2.Text) + 1);
                     MakeMusic();
                 }
                 GamePlay();
             }
+        }
+
+        private void WMP_OpenStateChange(object sender, AxWMPLib._WMPOCXEvents_OpenStateChangeEvent e)
+        {
+            if (Victorina.randomStart)
+                if (WMP.openState == WMPLib.WMPOpenState.wmposMediaOpen)
+                    WMP.Ctlcontrols.currentPosition = rnd.Next(0, (int)WMP.currentMedia.duration / 2);
         }
 
         //private void lblMusicDuration_Click(object sender, EventArgs e)

@@ -55,6 +55,7 @@
             this.WMP.Size = new System.Drawing.Size(253, 48);
             this.WMP.TabIndex = 0;
             this.WMP.Visible = false;
+            this.WMP.OpenStateChange += new AxWMPLib._WMPOCXEvents_OpenStateChangeEventHandler(this.WMP_OpenStateChange);
             // 
             // btnNext
             // 
@@ -162,7 +163,6 @@
             this.lblMusicDuration.Size = new System.Drawing.Size(68, 73);
             this.lblMusicDuration.TabIndex = 10;
             this.lblMusicDuration.Text = "0";
-            this.lblMusicDuration.Click += new System.EventHandler(this.lblMusicDuration_Click);
             // 
             // fGame
             // 
