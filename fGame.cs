@@ -15,6 +15,8 @@ namespace GuessSound
     {
         Random rnd = new Random();
         int musicDuration = Victorina.musicDuration;
+        bool[] players = new bool[2];
+
         public fGame()
         {
             InitializeComponent();
@@ -38,9 +40,12 @@ namespace GuessSound
                 musicDuration = Victorina.musicDuration;
                 int n = rnd.Next(0, Victorina.list.Count);
                 WMP.URL = Victorina.list[n];
+                Victorina.answer = System.IO.Path.GetFileNameWithoutExtension(WMP.URL);
                 //WMP.Ctlcontrols.play();
                 Victorina.list.RemoveAt(n);
                 lblMelodyCount.Text = Victorina.list.Count.ToString();
+                players[0] = false;
+                players[1] = false;
             }            
 
         }
@@ -99,13 +104,15 @@ namespace GuessSound
 
         private void fGame_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyData == Keys.A)
+            if (players[0] == false && e.KeyData == Keys.A)
             {
+                if (!timer1.Enabled) return;
                 GamePause();
                 fMessage fm = new fMessage();
                 fm.lblMessage.Text = "Player 1";
                 SoundPlayer sp = new SoundPlayer("Resources\\tone1.wav");
                 sp.PlaySync();
+                players[0] = true;
                 //if (MessageBox.Show("Right answere?", "Player 1", MessageBoxButtons.YesNo) == DialogResult.Yes)
                 if (fm.ShowDialog() == DialogResult.Yes)
                 {
@@ -114,13 +121,14 @@ namespace GuessSound
                 }
                 GamePlay();
             }
-            if (e.KeyData == Keys.P)
+            if (players[1] == false && e.KeyData == Keys.P)
             {
                 GamePause();
                 fMessage fm = new fMessage();
                 fm.lblMessage.Text = "Player 2";
                 SoundPlayer sp = new SoundPlayer("Resources\\tone1.wav");
                 sp.PlaySync();
+                players[1] = true;
                 //if (if (MessageBox.Show("Right answere?", "Player 2", MessageBoxButtons.YesNo) == DialogResult.Yes))
                 if (fm.ShowDialog() == DialogResult.Yes)
                 {
@@ -136,6 +144,12 @@ namespace GuessSound
             if (Victorina.randomStart)
                 if (WMP.openState == WMPLib.WMPOpenState.wmposMediaOpen)
                     WMP.Ctlcontrols.currentPosition = rnd.Next(0, (int)WMP.currentMedia.duration / 2);
+        }
+
+        private void lblCounter1_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left) (sender as Label).Text = Convert.ToString(Convert.ToInt32((sender as Label).Text) + 1);
+            if (e.Button == MouseButtons.Right) (sender as Label).Text = Convert.ToString(Convert.ToInt32((sender as Label).Text) - 1);
         }
 
         //private void lblMusicDuration_Click(object sender, EventArgs e)
