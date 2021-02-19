@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Media;
 
 namespace GuessSound
 {
@@ -103,6 +104,8 @@ namespace GuessSound
                 GamePause();
                 fMessage fm = new fMessage();
                 fm.lblMessage.Text = "Player 1";
+                SoundPlayer sp = new SoundPlayer("Resources\\tone1.wav");
+                sp.PlaySync();
                 //if (MessageBox.Show("Right answere?", "Player 1", MessageBoxButtons.YesNo) == DialogResult.Yes)
                 if (fm.ShowDialog() == DialogResult.Yes)
                 {
@@ -116,6 +119,8 @@ namespace GuessSound
                 GamePause();
                 fMessage fm = new fMessage();
                 fm.lblMessage.Text = "Player 2";
+                SoundPlayer sp = new SoundPlayer("Resources\\tone1.wav");
+                sp.PlaySync();
                 //if (if (MessageBox.Show("Right answere?", "Player 2", MessageBoxButtons.YesNo) == DialogResult.Yes))
                 if (fm.ShowDialog() == DialogResult.Yes)
                 {

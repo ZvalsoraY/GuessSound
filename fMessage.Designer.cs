@@ -28,9 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.lblMessage = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.lbTimer = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lblMessage
@@ -66,15 +69,32 @@
             this.button2.Text = "NO";
             this.button2.UseVisualStyleBackColor = true;
             // 
+            // timer1
+            // 
+            this.timer1.Interval = 1000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // lbTimer
+            // 
+            this.lbTimer.AutoSize = true;
+            this.lbTimer.Font = new System.Drawing.Font("Microsoft Sans Serif", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lbTimer.Location = new System.Drawing.Point(150, 135);
+            this.lbTimer.Name = "lbTimer";
+            this.lbTimer.Size = new System.Drawing.Size(68, 73);
+            this.lbTimer.TabIndex = 3;
+            this.lbTimer.Text = "0";
+            // 
             // fMessage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(480, 450);
+            this.Controls.Add(this.lbTimer);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.lblMessage);
             this.Name = "fMessage";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.fMessage_FormClosed);
             this.Load += new System.EventHandler(this.fMessage_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -85,5 +105,7 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         public System.Windows.Forms.Label lblMessage;
+        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Label lbTimer;
     }
 }
